@@ -6,7 +6,7 @@ use DateTimeImmutable;
 use Chocofamily\LaravelEventSauce\Exceptions\MakeFileFailed;
 use Illuminate\Support\Str;
 
-final class MakeAggregateRootCommand extends MakeCommand
+final class MakeAggregateCommand extends MakeCommand
 {
     protected $signature = 'make:aggregate-root {namespace}';
 

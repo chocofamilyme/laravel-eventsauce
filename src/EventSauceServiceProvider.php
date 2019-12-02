@@ -2,6 +2,8 @@
 
 namespace Chocofamily\LaravelEventSauce;
 
+use Chocofamily\LaravelEventSauce\Console\MakeAggregateCommand;
+use Chocofamily\LaravelEventSauce\Console\MakeConsumerCommand;
 use EventSauce\EventSourcing\Serialization\ConstructingMessageSerializer;
 use EventSauce\EventSourcing\Serialization\MessageSerializer;
 use Illuminate\Support\ServiceProvider;
@@ -27,7 +29,18 @@ final class EventSauceServiceProvider extends ServiceProvider
         });
 
         $this->commands([
-            GenerateCommand::class
+            GenerateCommand::class,
+            MakeAggregateCommand::class,
+            MakeConsumerCommand::class
         ]);
+    }
+
+    public function provides()
+    {
+        return [
+            GenerateCommand::class,
+            MakeAggregateCommand::class,
+            MakeConsumerCommand::class
+        ];
     }
 }
