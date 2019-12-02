@@ -30,7 +30,7 @@ final class MakeAggregateRootCommand extends MakeCommand
                 $aggregateRootRepositoryPath,
             ]);
         } catch (MakeFileFailed $exception) {
-
+            $this->error($exception->getMessage());
         }
         $this->makeDirectory($aggregateRootPath);
 

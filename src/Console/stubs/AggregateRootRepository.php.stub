@@ -1,0 +1,20 @@
+<?php
+
+namespace {{ namespace }};
+
+use EventSauce\LaravelEventSauce\AggregateRootRepository;
+
+/** @method \{{ namespace }}\{{ aggregateRoot }} retrieve(\{{ namespace }}\{{ aggregateRoot }}Id $aggregateRootId) */
+final class {{ aggregateRoot }}Repository extends AggregateRootRepository
+{
+    /** @var string */
+    protected $aggregateRoot = {{ aggregateRoot }}::class;
+
+    /** @var string */
+    protected $table = '{{ table }}';
+
+    /** @var array */
+    protected $consumers = [
+
+    ];
+}

@@ -1,0 +1,11 @@
+<?php
+
+namespace {{ namespace }};
+
+use EventSauce\EventSourcing\AggregateRoot;
+use EventSauce\EventSourcing\AggregateRootBehaviour;
+
+final class {{ aggregateRoot }} implements AggregateRoot
+{
+    use AggregateRootBehaviour;
+}
