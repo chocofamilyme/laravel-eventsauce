@@ -1,0 +1,57 @@
+{
+    "name": "chocofamilyme/laravel-eventsauce",
+    "description": "Laravel Eventsauce integration",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Aidyn Makhataev",
+            "email": "makataev.7@gmail.com",
+            "homepage": "https://github.com/AidynMakhataev",
+            "role": "Developer"
+        }
+    ],
+    "homepage": "https://github.com/chocofamily/laravel-eventsauce",
+    "keywords": [
+        "Laravel",
+        "LaravelEventSauce",
+        "chocofamily",
+        "eventsauce",
+        "event sourcing"
+    ],
+    "require": {
+        "php": "^7.2",
+        "ext-json": "*",
+        "eventsauce/eventsauce": "^0.7.0",
+        "illuminate/bus": "^5.7|^5.8|^6.0",
+        "illuminate/container": "^5.7|^5.8|^6.0",
+        "illuminate/queue": "^5.7|^5.8|^6.0",
+        "illuminate/support": "^5.7|^5.8|^6.0",
+        "ramsey/uuid": "^3.8"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.0",
+        "mockery/mockery": "^1.1",
+        "orchestra/testbench": "^3.7.6|^3.8|^4.0",
+        "sempro/phpunit-pretty-print": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Chocofamily\\LaravelEventSauce\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Chocofamily\\LaravelEventSauce\\Tests\\": "tests"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Chocofamily\\LaravelEventSauce\\EventSauceServiceProvider"
+            ]
+        }
+    }
+}
