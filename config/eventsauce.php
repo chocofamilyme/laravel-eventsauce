@@ -29,4 +29,5 @@ return [
      */
     'message_repository' => \Chocofamily\LaravelEventSauce\MessageRepository::class,
 
+    'consumer_handler'   => \Chocofamily\LaravelEventSauce\ConsumerHandler::class
 ];

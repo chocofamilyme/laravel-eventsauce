@@ -4,17 +4,17 @@ namespace Chocofamily\LaravelEventSauce;
 
 use Chocofamily\LaravelEventSauce\Exceptions\AggregateRootRepositoryInstanciationFailed;
 use EventSauce\EventSourcing\AggregateRoot;
+use EventSauce\EventSourcing\AggregateRootId;
 use EventSauce\EventSourcing\AggregateRootRepository as EventSauceAggregateRootRepository;
 use EventSauce\EventSourcing\ConstructingAggregateRootRepository;
+use EventSauce\EventSourcing\Consumer;
 use EventSauce\EventSourcing\DefaultHeadersDecorator;
+use EventSauce\EventSourcing\MessageDecorator;
 use EventSauce\EventSourcing\MessageDecoratorChain;
 use EventSauce\EventSourcing\MessageDispatcherChain;
 use EventSauce\EventSourcing\MessageRepository;
-use EventSauce\EventSourcing\SynchronousMessageDispatcher;
-use Illuminate\Contracts\Container\Container;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Support\Facades\DB;
-use EventSauce\EventSourcing\Consumer;
 
 abstract class AggregateRootRepository implements EventSauceAggregateRootRepository
 {
@@ -24,10 +24,7 @@ abstract class AggregateRootRepository implements EventSauceAggregateRootReposit
     /** @var array */
     protected $consumers = [];
 
-    /** @var array */
-    protected $queuedConsumers = [];
-
-    /** @var ConnectionInterface */
+    /** @var string */
     protected $connection;
 
     /** @var string */
@@ -42,31 +39,60 @@ abstract class AggregateRootRepository implements EventSauceAggregateRootReposit
     /** @var ConstructingAggregateRootRepository */
     protected $repository;
 
-    /** @var Container */
-    protected $container;
+    /** @var string */
+    protected $consumerHandlerClass;
 
     /**
      * AggregateRootRepository constructor.
-     * @param Container $container
      * @throws AggregateRootRepositoryInstanciationFailed
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    public function __construct(Container $container)
+    public function __construct()
     {
         $this->assertAggregateClassIsValid();
-
-        $this->container = $container;
 
         $this->repository = new ConstructingAggregateRootRepository(
             $this->aggregateRoot,
             $this->getMessageRepository(),
             new MessageDispatcherChain(
-                new SynchronousMessageDispatcher(...$this->getInstanciatedConsumers())
+                new MessageDispatcher(
+                    $this->getConsumerHandlerClass(),
+                    $this->getInstanciatedConsumers()
+                ),
+                new EventMessageDispatcher()
             ),
             new MessageDecoratorChain(
                 new DefaultHeadersDecorator(),
                 ...$this->getInstanciatedDecorators()
             )
         );
+    }
+
+    /**
+     * @param AggregateRootId $aggregateRootId
+     * @return object
+     */
+    public function retrieve(AggregateRootId $aggregateRootId): object
+    {
+        return $this->repository->retrieve($aggregateRootId);
+    }
+
+    /**
+     * @param object $aggregateRoot
+     */
+    public function persist(object $aggregateRoot)
+    {
+        $this->repository->persist($aggregateRoot);
+    }
+
+    /**
+     * @param AggregateRootId $aggregateRootId
+     * @param int $aggregateRootVersion
+     * @param object ...$events
+     */
+    public function persistEvents(AggregateRootId $aggregateRootId, int $aggregateRootVersion, object ...$events)
+    {
+       $this->repository->persistEvents($aggregateRootId, $aggregateRootVersion, ...$events);
     }
 
     /**
@@ -83,6 +109,9 @@ abstract class AggregateRootRepository implements EventSauceAggregateRootReposit
         }
     }
 
+    /**
+     * @return ConnectionInterface
+     */
     protected function getConnection(): ConnectionInterface
     {
         $connection = $this->connection
@@ -92,31 +121,53 @@ abstract class AggregateRootRepository implements EventSauceAggregateRootReposit
         return DB::connection($connection);
     }
 
+    /**
+     * @return MessageRepository
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
     protected function getMessageRepository(): MessageRepository
     {
         $messageRepository = $this->messageRepository ?? config('eventsauce.message_repository');
 
-        return $this->container->makeWith($messageRepository, [
+        return app()->make($messageRepository, [
             'connection'    =>  $this->getConnection(),
             'table'         =>  $this->table
         ]);
     }
 
+    /**
+     * @return string
+     */
+    protected function getConsumerHandlerClass(): string
+    {
+        return $this->consumerHandlerClass ?? config('eventsauce.consumer_handler');
+    }
+
+    /**
+     * @return Consumer[]
+     */
     protected function getInstanciatedConsumers(): array
     {
         return $this->instanciate($this->consumers);
     }
 
+    /**
+     * @return MessageDecorator[]
+     */
     protected function getInstanciatedDecorators(): array
     {
         return $this->instanciate($this->decorators);
     }
 
+    /**
+     * @param array $classes
+     * @return array
+     */
     protected function instanciate(array $classes): array
     {
         return array_map(function ($class) {
             return is_string($class)
-                ? $this->container->make($class)
+                ? app()->make($class)
                 : $class;
         }, $classes);
     }
