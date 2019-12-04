@@ -2,7 +2,7 @@
 
 namespace {{ namespace }};
 
-use EventSauce\LaravelEventSauce\AggregateRootRepository;
+use Chocofamily\LaravelEventSauce\AggregateRootRepository;
 
 /** @method \{{ namespace }}\{{ aggregateRoot }} retrieve(\{{ namespace }}\{{ aggregateRoot }}Id $aggregateRootId) */
 final class {{ aggregateRoot }}Repository extends AggregateRootRepository
@@ -15,6 +15,11 @@ final class {{ aggregateRoot }}Repository extends AggregateRootRepository
 
     /** @var array */
     protected $consumers = [
+
+    ];
+
+    /** @var array */
+    protected $decorators = [
 
     ];
 }
