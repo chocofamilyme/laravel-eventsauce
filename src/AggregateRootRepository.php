@@ -7,7 +7,6 @@ use EventSauce\EventSourcing\AggregateRoot;
 use EventSauce\EventSourcing\AggregateRootRepository as EventSauceAggregateRootRepository;
 use EventSauce\EventSourcing\ConstructingAggregateRootRepository;
 use EventSauce\EventSourcing\DefaultHeadersDecorator;
-use EventSauce\EventSourcing\MessageDecorator;
 use EventSauce\EventSourcing\MessageDecoratorChain;
 use EventSauce\EventSourcing\MessageDispatcherChain;
 use EventSauce\EventSourcing\MessageRepository;
@@ -87,7 +86,7 @@ abstract class AggregateRootRepository implements EventSauceAggregateRootReposit
     protected function getConnection(): ConnectionInterface
     {
         $connection = $this->connection
-            ?? config('eventsauce.database_connection')
+            ?? config('eventsauce.connection')
             ?? config('database.default');
 
         return DB::connection($connection);
