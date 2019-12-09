@@ -30,7 +30,7 @@ class SnapshotRepository implements EventSauceSnapshotRepository
             ->insert([
                 'aggregate_root_id'         =>  $snapshot->aggregateRootId()->toString(),
                 'aggregate_root_version'    =>  $snapshot->aggregateRootVersion(),
-                'state'                     =>  $snapshot->state(),
+                'state'                     =>  json_encode($snapshot->state()),
                 'recorded_at'               =>  Carbon::now()->toDateTimeString()
             ]);
     }
@@ -49,7 +49,7 @@ class SnapshotRepository implements EventSauceSnapshotRepository
         return new Snapshot(
             $id,
             $snapshot->aggregate_root_version,
-            $snapshot->state
+            json_decode($snapshot->state)
         );
     }
 }
