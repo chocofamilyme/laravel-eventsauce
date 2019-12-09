@@ -5,7 +5,7 @@ namespace Chocofamily\LaravelEventSauce;
 use Chocofamily\LaravelEventSauce\Exceptions\AggregateRootRepositoryInstanciationFailed;
 use EventSauce\EventSourcing\AggregateRoot;
 use EventSauce\EventSourcing\AggregateRootId;
-use EventSauce\EventSourcing\AggregateRootRepository as EventSauceAggregateRootRepository;
+use EventSauce\EventSourcing\Snapshotting\AggregateRootRepositoryWithSnapshotting as EventSauceAggregateRootRepository;
 use EventSauce\EventSourcing\ConstructingAggregateRootRepository;
 use EventSauce\EventSourcing\Consumer;
 use EventSauce\EventSourcing\DefaultHeadersDecorator;
@@ -13,6 +13,9 @@ use EventSauce\EventSourcing\MessageDecorator;
 use EventSauce\EventSourcing\MessageDecoratorChain;
 use EventSauce\EventSourcing\MessageDispatcherChain;
 use EventSauce\EventSourcing\MessageRepository;
+use EventSauce\EventSourcing\Snapshotting\SnapshotRepository;
+use EventSauce\EventSourcing\Snapshotting\AggregateRootWithSnapshotting;
+use EventSauce\EventSourcing\Snapshotting\ConstructingAggregateRootRepositoryWithSnapshotting;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Support\Facades\DB;
 
@@ -28,15 +31,21 @@ abstract class AggregateRootRepository implements EventSauceAggregateRootReposit
     protected $connection;
 
     /** @var string */
-    protected $table;
+    protected $table = 'domain_messages';
 
     /** @var MessageRepository */
     protected $messageRepository;
 
+    /** @var SnapshotRepository */
+    protected $snapshotRepository;
+
+    /** @var string */
+    protected $snapshotTable = 'snapshots';
+
     /** @var array */
     protected $decorators = [];
 
-    /** @var ConstructingAggregateRootRepository */
+    /** @var ConstructingAggregateRootRepositoryWithSnapshotting */
     protected $repository;
 
     /** @var string */
@@ -51,7 +60,7 @@ abstract class AggregateRootRepository implements EventSauceAggregateRootReposit
     {
         $this->assertAggregateClassIsValid();
 
-        $this->repository = new ConstructingAggregateRootRepository(
+        $aggregateRepository = new ConstructingAggregateRootRepository(
             $this->aggregateRoot,
             $this->getMessageRepository(),
             new MessageDispatcherChain(
@@ -65,6 +74,13 @@ abstract class AggregateRootRepository implements EventSauceAggregateRootReposit
                 new DefaultHeadersDecorator(),
                 ...$this->getInstanciatedDecorators()
             )
+        );
+
+        $this->repository = new ConstructingAggregateRootRepositoryWithSnapshotting(
+            $this->aggregateRoot,
+            $this->getMessageRepository(),
+            $this->getSnapshotRepository(),
+            $aggregateRepository
         );
     }
 
@@ -93,6 +109,23 @@ abstract class AggregateRootRepository implements EventSauceAggregateRootReposit
     public function persistEvents(AggregateRootId $aggregateRootId, int $aggregateRootVersion, object ...$events)
     {
        $this->repository->persistEvents($aggregateRootId, $aggregateRootVersion, ...$events);
+    }
+
+    /**
+     * @param AggregateRootId $aggregateRootId
+     * @return object
+     */
+    public function retrieveFromSnapshot(AggregateRootId $aggregateRootId): object
+    {
+        return $this->repository->retrieveFromSnapshot($aggregateRootId);
+    }
+
+    /**
+     * @param AggregateRootWithSnapshotting $aggregateRoot
+     */
+    public function storeSnapshot(AggregateRootWithSnapshotting $aggregateRoot): void
+    {
+        $this->repository->storeSnapshot($aggregateRoot);
     }
 
     /**
@@ -132,6 +165,20 @@ abstract class AggregateRootRepository implements EventSauceAggregateRootReposit
         return app()->make($messageRepository, [
             'connection'    =>  $this->getConnection(),
             'table'         =>  $this->table
+        ]);
+    }
+
+    /**
+     * @return SnapshotRepository
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    protected function getSnapshotRepository(): SnapshotRepository
+    {
+        $snapshotRepository = $this->snapshotRepository ?? config('eventsauce.snapshot_repository');
+
+        return app()->make($snapshotRepository, [
+            'connection'    =>  $this->getConnection(),
+            'table'         =>  $this->snapshotTable
         ]);
     }
 

@@ -17,6 +17,10 @@ final class EventSauceServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__.'/../config/eventsauce.php' => $this->app->configPath('eventsauce.php'),
             ], ['eventsauce', 'eventsauce-config']);
+
+            $this->publishes([
+                __DIR__.'/../database/migrations' => $this->app->databasePath('migrations'),
+            ], ['eventsauce', 'eventsauce-migrations']);
         }
     }
 

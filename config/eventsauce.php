@@ -16,7 +16,7 @@ return [
     ],
 
     /*
-     * This connection name will be used to storge messages. When
+     * This connection name will be used to store messages. When
      * set to null the default connection will be used.
      */
     'connection' => null,
@@ -29,5 +29,17 @@ return [
      */
     'message_repository' => \Chocofamily\LaravelEventSauce\MessageRepository::class,
 
+    /*
+     * This class will be used to store snapshots.
+     *
+     * You may change this to any class that implements
+     * EventSauce\EventSourcing\Snapshotting\SnapshotRepository
+     */
+    'snapshot_repository' => \Chocofamily\LaravelEventSauce\SnapshotRepository::class,
+
+    /*
+     * This class will be used to put message on the handlers
+     */
     'consumer_handler'   => \Chocofamily\LaravelEventSauce\ConsumerHandler::class
+
 ];
