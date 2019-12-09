@@ -47,7 +47,7 @@ class SnapshotRepository implements EventSauceSnapshotRepository
         }
 
         return new Snapshot(
-            AggregateRootId::fromString($snapshot->aggregate_root_id),
+            $id,
             $snapshot->aggregate_root_version,
             $snapshot->state
         );

@@ -20,7 +20,7 @@ class CreateDomainMessagesTable extends Migration
             $table->string('aggregate_root_id', 36)->nullable()->index();
             $table->integer('aggregate_root_version')->nullable()->index();
             $table->dateTime('recorded_at', 6)->index();
-            $table->text('payload');
+            $table->jsonb('payload');
         });
     }
 

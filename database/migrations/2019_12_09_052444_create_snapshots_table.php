@@ -17,7 +17,7 @@ class CreateSnapshotsTable extends Migration
             $table->bigIncrements('id');
             $table->string('aggregate_root_id', 36)->index();
             $table->integer('aggregate_root_version', false, true);
-            $table->text('state')->nullable();
+            $table->jsonb('state');
             $table->dateTime('recorded_at', 6)->index();
         });
     }
