@@ -19,7 +19,17 @@ return [
      * This connection name will be used to store messages. When
      * set to null the default connection will be used.
      */
-    'connection' => null,
+    'connection' => env('EVENTSAUCE_CONNECTION'),
+
+    /*
+     * The default table name, used to store messages.
+     */
+    'table' =>  env('EVENTSAUCE_TABLE', 'domain_messages'),
+
+    /*
+     * The default table name, used to store snapshots.
+     */
+    'snapshot_table' => env('EVENTSAUCE_SNAPSHOT_TABLE', 'snapshots'),
 
     /*
      * This class will be used to store messages.

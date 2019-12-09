@@ -37,7 +37,7 @@ final class MakeAggregateCommand extends MakeCommand
         $replacements = [
             'aggregateRoot' => $aggregateRoot = class_basename($aggregateRootClass),
             'namespace' => substr($aggregateRootClass, 0, strrpos($aggregateRootClass, '\\')),
-            'table' => Str::snake(class_basename($aggregateRootClass)).'_domain_messages',
+            'table' => $this->option('migration') ? Str::snake(class_basename($aggregateRootClass)).'_domain_messages' : config('eventsauce.table'),
             'migration' => 'Create'.ucfirst(class_basename($aggregateRootClass)).'DomainMessagesTable',
         ];
 

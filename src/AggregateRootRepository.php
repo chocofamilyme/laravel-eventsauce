@@ -31,7 +31,7 @@ abstract class AggregateRootRepository implements EventSauceAggregateRootReposit
     protected $connection;
 
     /** @var string */
-    protected $table = 'domain_messages';
+    protected $table;
 
     /** @var MessageRepository */
     protected $messageRepository;
@@ -40,7 +40,7 @@ abstract class AggregateRootRepository implements EventSauceAggregateRootReposit
     protected $snapshotRepository;
 
     /** @var string */
-    protected $snapshotTable = 'snapshots';
+    protected $snapshotTable;
 
     /** @var array */
     protected $decorators = [];
@@ -164,7 +164,7 @@ abstract class AggregateRootRepository implements EventSauceAggregateRootReposit
 
         return app()->make($messageRepository, [
             'connection'    =>  $this->getConnection(),
-            'table'         =>  $this->table
+            'table'         =>  $this->table ?? config('eventsauce.table')
         ]);
     }
 
@@ -178,7 +178,7 @@ abstract class AggregateRootRepository implements EventSauceAggregateRootReposit
 
         return app()->make($snapshotRepository, [
             'connection'    =>  $this->getConnection(),
-            'table'         =>  $this->snapshotTable
+            'table'         =>  $this->snapshotTable ?? config('eventsauce.snapshot_table')
         ]);
     }
 
