@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 final class MakeAggregateCommand extends MakeCommand
 {
-    protected $signature = 'make:aggregate-root {namespace}';
+    protected $signature = 'make:aggregate-root {namespace} {--migration}';
 
     protected $description = 'Create a new aggregate root and resources';
 
@@ -47,10 +47,15 @@ final class MakeAggregateCommand extends MakeCommand
             'AggregateRootRepository' => $aggregateRootRepositoryPath,
         ], $replacements);
 
-        $this->createMigration($replacements);
+        if ($this->option('migration')) {
+            $this->createMigration($replacements);
+        }
 
-        $this->info("{$aggregateRoot} classes and migration created successfully!");
-        $this->comment("Run `php artisan migrate` to create the {$replacements['table']} table.");
+        $this->info("{$aggregateRoot} classes and resources created successfully!");
+
+        if ($this->option('migration')) {
+            $this->comment("Run `php artisan migrate` to create the {$replacements['table']} table.");
+        }
     }
 
     private function createMigration(array $replacements): void
