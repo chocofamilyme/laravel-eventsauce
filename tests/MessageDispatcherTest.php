@@ -4,7 +4,7 @@ namespace Chocofamily\LaravelEventSauce\Tests;
 
 use Chocofamily\LaravelEventSauce\ConsumerHandler;
 use Chocofamily\LaravelEventSauce\MessageDispatcher;
-use Chocofamily\LaravelEventSauce\Tests\TestClasses\MoneyConsumer;
+use Chocofamily\LaravelEventSauce\Tests\TestClasses\UpdateBalanceTable;
 use Illuminate\Support\Facades\Bus;
 
 class MessageDispatcherTest extends TestCase
@@ -24,7 +24,7 @@ class MessageDispatcherTest extends TestCase
     {
         return new MessageDispatcher(
             ConsumerHandler::class,
-            [new MoneyConsumer()]
+            [new UpdateBalanceTable()]
         );
     }
 }

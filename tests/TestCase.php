@@ -5,9 +5,12 @@ namespace Chocofamily\LaravelEventSauce\Tests;
 use Chocofamily\LaravelEventSauce\EventSauceServiceProvider;
 use Chocofamily\LaravelEventSauce\Tests\TestClasses\MoneyAdded;
 use Chocofamily\LaravelEventSauce\Tests\TestClasses\MoneyAggregateRootId;
+use Chocofamily\LaravelEventSauce\Tests\TestClasses\MoneyAggregateRootRepository;
 use EventSauce\EventSourcing\DefaultHeadersDecorator;
 use EventSauce\EventSourcing\Header;
 use EventSauce\EventSourcing\Message;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 abstract class TestCase extends Orchestra
@@ -20,6 +23,13 @@ abstract class TestCase extends Orchestra
            '--database' =>  'testing',
            '--path'     =>  realpath(__DIR__ . '/../database/migrations')
        ]);
+
+        Schema::create('balance', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->integer('user_id');
+            $table->integer('balance');
+            $table->timestamps();
+        });
     }
 
     protected function getPackageProviders($app)
@@ -48,6 +58,11 @@ abstract class TestCase extends Orchestra
         $decorator = new DefaultHeadersDecorator();
 
         return $decorator->decorate(new Message($event, [Header::AGGREGATE_ROOT_ID => $id]));
+    }
+
+    protected function repository(): MoneyAggregateRootRepository
+    {
+        return new MoneyAggregateRootRepository();
     }
 
 }

@@ -53,5 +53,8 @@
                 "Chocofamily\\LaravelEventSauce\\EventSauceServiceProvider"
             ]
         }
+    },
+    "scripts": {
+        "test": "php vendor/bin/phpunit"
     }
 }

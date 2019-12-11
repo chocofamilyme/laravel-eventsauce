@@ -6,26 +6,11 @@ use Chocofamily\LaravelEventSauce\AggregateRootRepository;
 use Chocofamily\LaravelEventSauce\Exceptions\AggregateRootRepositoryInstanciationFailed;
 use Chocofamily\LaravelEventSauce\Tests\TestClasses\MoneyAggregateRoot;
 use Chocofamily\LaravelEventSauce\Tests\TestClasses\MoneyAggregateRootId;
-use Chocofamily\LaravelEventSauce\Tests\TestClasses\MoneyAggregateRootRepository;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Schema;
 
 class AggregateRootRepositoryTest extends TestCase
 {
     use RefreshDatabase;
-
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        Schema::create('balance', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->integer('user_id');
-            $table->integer('balance');
-            $table->timestamps();
-        });
-    }
 
     public function testItThrowsAggregateRootRepositoryInstanciationFailedException()
     {
@@ -86,10 +71,5 @@ class AggregateRootRepositoryTest extends TestCase
             'user_id'   =>  2,
             'balance'   =>  500
         ]);
-    }
-
-    private function repository(): MoneyAggregateRootRepository
-    {
-        return new MoneyAggregateRootRepository();
     }
 }
