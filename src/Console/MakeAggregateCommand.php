@@ -14,13 +14,18 @@ final class MakeAggregateCommand extends MakeCommand
 
     public function handle(): void
     {
-        $aggregateRootClass = $this->formatClassName($this->argument('namespace'));
+        /** @var string $namespace */
+        $namespace = $this->argument('namespace');
+        /** @scrutinizer ignore-type */
+        $aggregateRootClass = $this->formatClassName($namespace);
+
         $aggregateRootPath = $this->getPath($aggregateRootClass);
 
-        $aggregateRootIdClass = $this->formatClassName($this->argument('namespace').'Id');
+        $aggregateRootIdClass = $this->formatClassName($namespace.'Id');
+
         $aggregateRootIdPath = $this->getPath($aggregateRootIdClass);
 
-        $aggregateRootRepositoryClass = $this->formatClassName($this->argument('namespace').'Repository');
+        $aggregateRootRepositoryClass = $this->formatClassName($namespace.'Repository');
         $aggregateRootRepositoryPath = $this->getPath($aggregateRootRepositoryClass);
 
         try {

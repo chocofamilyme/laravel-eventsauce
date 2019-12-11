@@ -3,9 +3,9 @@
 namespace Chocofamily\LaravelEventSauce;
 
 use EventSauce\EventSourcing\Message;
-use EventSauce\EventSourcing\MessageDispatcher;
+use EventSauce\EventSourcing\MessageDispatcher as EventSauceMessageDispatcher;
 
-final class EventMessageDispatcher implements MessageDispatcher
+final class EventMessageDispatcher implements EventSauceMessageDispatcher
 {
     public function dispatch(Message ...$messages)
     {
