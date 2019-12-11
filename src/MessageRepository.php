@@ -3,13 +3,13 @@
 namespace Chocofamily\LaravelEventSauce;
 
 use EventSauce\EventSourcing\AggregateRootId;
-use EventSauce\EventSourcing\Message;
 use EventSauce\EventSourcing\Header;
+use EventSauce\EventSourcing\Message;
 use EventSauce\EventSourcing\MessageRepository as EventSauceMessageRepository;
 use EventSauce\EventSourcing\Serialization\MessageSerializer;
 use Generator;
-use Ramsey\Uuid\Uuid;
 use Illuminate\Database\Connection;
+use Ramsey\Uuid\Uuid;
 
 class MessageRepository implements EventSauceMessageRepository
 {
@@ -45,7 +45,7 @@ class MessageRepository implements EventSauceMessageRepository
                     'aggregate_root_id'         =>  $headers[Header::AGGREGATE_ROOT_ID] ?? null,
                     'aggregate_root_version'    =>  $headers[Header::AGGREGATE_ROOT_VERSION] ?? null,
                     'recorded_at'               =>  $headers[Header::TIME_OF_RECORDING],
-                    'payload'                   =>  json_encode($serializedMessage)
+                    'payload'                   =>  json_encode($serializedMessage),
                 ]);
         }
     }

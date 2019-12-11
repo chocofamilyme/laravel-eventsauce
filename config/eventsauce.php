@@ -50,6 +50,6 @@ return [
     /*
      * This class will be used to put message on the handlers
      */
-    'consumer_handler'   => \Chocofamily\LaravelEventSauce\ConsumerHandler::class
+    'consumer_handler'   => \Chocofamily\LaravelEventSauce\ConsumerHandler::class,
 
 ];

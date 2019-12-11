@@ -19,9 +19,9 @@ abstract class TestCase extends Orchestra
     {
         parent::setUp();
 
-       $this->loadMigrationsFrom([
+        $this->loadMigrationsFrom([
            '--database' =>  'testing',
-           '--path'     =>  realpath(__DIR__ . '/../database/migrations')
+           '--path'     =>  realpath(__DIR__.'/../database/migrations'),
        ]);
 
         Schema::create('balance', function (Blueprint $table) {
@@ -64,5 +64,4 @@ abstract class TestCase extends Orchestra
     {
         return new MoneyAggregateRootRepository();
     }
-
 }

@@ -48,7 +48,7 @@ class MoneyAggregateRoot implements AggregateRootWithSnapshotting
     {
         return [
             'userId'    =>  $this->userId,
-            'amount'    =>  $this->amount
+            'amount'    =>  $this->amount,
         ];
     }
 

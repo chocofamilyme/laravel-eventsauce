@@ -3,8 +3,8 @@
 namespace Chocofamily\LaravelEventSauce\Console;
 
 use Chocofamily\LaravelEventSauce\Exceptions\CodeGenerationFailed;
-use EventSauce\EventSourcing\CodeGeneration\YamlDefinitionLoader;
 use EventSauce\EventSourcing\CodeGeneration\CodeDumper;
+use EventSauce\EventSourcing\CodeGeneration\YamlDefinitionLoader;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 

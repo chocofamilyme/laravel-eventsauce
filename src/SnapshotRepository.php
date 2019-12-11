@@ -10,10 +10,10 @@ use Illuminate\Support\Carbon;
 
 class SnapshotRepository implements EventSauceSnapshotRepository
 {
-    /** @var Connection  */
+    /** @var Connection */
     protected $connection;
 
-    /** @var string  */
+    /** @var string */
     protected $table;
 
     public function __construct(Connection $connection, string $table)
@@ -31,7 +31,7 @@ class SnapshotRepository implements EventSauceSnapshotRepository
                 'aggregate_root_id'         =>  $snapshot->aggregateRootId()->toString(),
                 'aggregate_root_version'    =>  $snapshot->aggregateRootVersion(),
                 'state'                     =>  json_encode($snapshot->state()),
-                'recorded_at'               =>  Carbon::now()->toDateTimeString()
+                'recorded_at'               =>  Carbon::now()->toDateTimeString(),
             ]);
     }
 

@@ -5,7 +5,6 @@ namespace Chocofamily\LaravelEventSauce;
 use Chocofamily\LaravelEventSauce\Exceptions\AggregateRootRepositoryInstanciationFailed;
 use EventSauce\EventSourcing\AggregateRoot;
 use EventSauce\EventSourcing\AggregateRootId;
-use EventSauce\EventSourcing\Snapshotting\AggregateRootRepositoryWithSnapshotting as EventSauceAggregateRootRepository;
 use EventSauce\EventSourcing\ConstructingAggregateRootRepository;
 use EventSauce\EventSourcing\Consumer;
 use EventSauce\EventSourcing\DefaultHeadersDecorator;
@@ -13,9 +12,10 @@ use EventSauce\EventSourcing\MessageDecorator;
 use EventSauce\EventSourcing\MessageDecoratorChain;
 use EventSauce\EventSourcing\MessageDispatcherChain;
 use EventSauce\EventSourcing\MessageRepository;
-use EventSauce\EventSourcing\Snapshotting\SnapshotRepository;
+use EventSauce\EventSourcing\Snapshotting\AggregateRootRepositoryWithSnapshotting as EventSauceAggregateRootRepository;
 use EventSauce\EventSourcing\Snapshotting\AggregateRootWithSnapshotting;
 use EventSauce\EventSourcing\Snapshotting\ConstructingAggregateRootRepositoryWithSnapshotting;
+use EventSauce\EventSourcing\Snapshotting\SnapshotRepository;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Support\Facades\DB;
 
@@ -108,7 +108,7 @@ abstract class AggregateRootRepository implements EventSauceAggregateRootReposit
      */
     public function persistEvents(AggregateRootId $aggregateRootId, int $aggregateRootVersion, object ...$events)
     {
-       $this->repository->persistEvents($aggregateRootId, $aggregateRootVersion, ...$events);
+        $this->repository->persistEvents($aggregateRootId, $aggregateRootVersion, ...$events);
     }
 
     /**
@@ -137,7 +137,7 @@ abstract class AggregateRootRepository implements EventSauceAggregateRootReposit
             throw AggregateRootRepositoryInstanciationFailed::aggregateRootClassDoesNotExist();
         }
 
-        if(! is_a($this->aggregateRoot, AggregateRoot::class, true)) {
+        if (! is_a($this->aggregateRoot, AggregateRoot::class, true)) {
             throw AggregateRootRepositoryInstanciationFailed::aggregateRootClassIsNotValid();
         }
     }
@@ -164,7 +164,7 @@ abstract class AggregateRootRepository implements EventSauceAggregateRootReposit
 
         return app()->make($messageRepository, [
             'connection'    =>  $this->getConnection(),
-            'table'         =>  $this->table ?? config('eventsauce.table')
+            'table'         =>  $this->table ?? config('eventsauce.table'),
         ]);
     }
 
@@ -178,7 +178,7 @@ abstract class AggregateRootRepository implements EventSauceAggregateRootReposit
 
         return app()->make($snapshotRepository, [
             'connection'    =>  $this->getConnection(),
-            'table'         =>  $this->snapshotTable ?? config('eventsauce.snapshot_table')
+            'table'         =>  $this->snapshotTable ?? config('eventsauce.snapshot_table'),
         ]);
     }
 

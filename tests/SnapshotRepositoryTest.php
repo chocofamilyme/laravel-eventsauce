@@ -35,7 +35,7 @@ class SnapshotRepositoryTest extends TestCase
 
         $this->assertDatabaseHas('snapshots', [
             'aggregate_root_id' =>  $aggregateRootId->toString(),
-            'state'             =>  json_encode(['userId' => 7, 'amount' => 700])
+            'state'             =>  json_encode(['userId' => 7, 'amount' => 700]),
         ]);
     }
 
