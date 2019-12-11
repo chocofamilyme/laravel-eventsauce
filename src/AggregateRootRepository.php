@@ -6,22 +6,22 @@ use Chocofamily\LaravelEventSauce\Exceptions\AggregateRootRepositoryInstanciatio
 use EventSauce\EventSourcing\AggregateRoot;
 use EventSauce\EventSourcing\AggregateRootId;
 use EventSauce\EventSourcing\ConstructingAggregateRootRepository;
-use EventSauce\EventSourcing\Consumer;
+use EventSauce\EventSourcing\Consumer as EventSauceConsumer;
 use EventSauce\EventSourcing\DefaultHeadersDecorator;
 use EventSauce\EventSourcing\MessageDecorator;
 use EventSauce\EventSourcing\MessageDecoratorChain;
 use EventSauce\EventSourcing\MessageDispatcherChain;
-use EventSauce\EventSourcing\MessageRepository;
+use EventSauce\EventSourcing\MessageRepository as EventSauceMessageRepository;
 use EventSauce\EventSourcing\Snapshotting\AggregateRootRepositoryWithSnapshotting as EventSauceAggregateRootRepository;
 use EventSauce\EventSourcing\Snapshotting\AggregateRootWithSnapshotting;
 use EventSauce\EventSourcing\Snapshotting\ConstructingAggregateRootRepositoryWithSnapshotting;
-use EventSauce\EventSourcing\Snapshotting\SnapshotRepository;
+use EventSauce\EventSourcing\Snapshotting\SnapshotRepository as EventSauceSnapshotRepository;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Support\Facades\DB;
 
 abstract class AggregateRootRepository implements EventSauceAggregateRootRepository
 {
-    /** @var AggregateRoot|null */
+    /** @var string */
     protected $aggregateRoot;
 
     /** @var array */
@@ -33,10 +33,10 @@ abstract class AggregateRootRepository implements EventSauceAggregateRootReposit
     /** @var string */
     protected $table;
 
-    /** @var MessageRepository */
+    /** @var string */
     protected $messageRepository;
 
-    /** @var SnapshotRepository */
+    /** @var string */
     protected $snapshotRepository;
 
     /** @var string */
@@ -155,10 +155,10 @@ abstract class AggregateRootRepository implements EventSauceAggregateRootReposit
     }
 
     /**
-     * @return MessageRepository
+     * @return EventSauceMessageRepository
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    protected function getMessageRepository(): MessageRepository
+    protected function getMessageRepository(): EventSauceMessageRepository
     {
         $messageRepository = $this->messageRepository ?? config('eventsauce.message_repository');
 
@@ -169,10 +169,10 @@ abstract class AggregateRootRepository implements EventSauceAggregateRootReposit
     }
 
     /**
-     * @return SnapshotRepository
+     * @return EventSauceSnapshotRepository
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    protected function getSnapshotRepository(): SnapshotRepository
+    protected function getSnapshotRepository(): EventSauceSnapshotRepository
     {
         $snapshotRepository = $this->snapshotRepository ?? config('eventsauce.snapshot_repository');
 
@@ -191,7 +191,7 @@ abstract class AggregateRootRepository implements EventSauceAggregateRootReposit
     }
 
     /**
-     * @return Consumer[]
+     * @return EventSauceConsumer[]
      */
     protected function getInstanciatedConsumers(): array
     {

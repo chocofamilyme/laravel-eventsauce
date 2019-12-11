@@ -12,8 +12,13 @@ final class MakeConsumerCommand extends MakeCommand
 
     public function handle(): void
     {
-        $consumerClass = $this->formatClassName($this->argument('class'));
+        /** @var string $class */
+        $class = $this->argument('class');
+        /** @scrutinizer ignore-type */
+        $consumerClass = $this->formatClassName($class);
+
         $consumerPath = $this->getPath($consumerClass);
+        
         try {
             $this->ensureValidPaths([
                 $consumerPath,
@@ -21,7 +26,9 @@ final class MakeConsumerCommand extends MakeCommand
         } catch (MakeFileFailed $exception) {
             $this->error($exception->getMessage());
         }
+
         $this->makeDirectory($consumerPath);
+
         $this->makeFiles(
             ['Consumer' => $consumerPath],
             [
@@ -29,6 +36,7 @@ final class MakeConsumerCommand extends MakeCommand
                 'namespace' => substr($consumerClass, 0, strrpos($consumerClass, '\\')),
             ]
         );
+
         $this->info("{$consumerClass} class created successfully!");
     }
 }
