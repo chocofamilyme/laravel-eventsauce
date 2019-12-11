@@ -34,6 +34,7 @@ abstract class MakeCommand extends Command
         if (Str::startsWith($name, $rootNamespace)) {
             return $name;
         }
+
         return $this->formatClassName(trim($rootNamespace, '\\').'\\'.$name);
     }
 
@@ -44,6 +45,7 @@ abstract class MakeCommand extends Command
     protected function getPath(string $name): string
     {
         $name = Str::replaceFirst($this->laravel->getNamespace(), '', $name);
+
         return $this->laravel['path'].'/'.str_replace('\\', '/', $name).'.php';
     }
 
@@ -83,6 +85,7 @@ abstract class MakeCommand extends Command
         foreach ($replacements as $search => $replace) {
             $content = str_replace("{{ {$search} }}", $replace, $content);
         }
+
         return $content;
     }
 

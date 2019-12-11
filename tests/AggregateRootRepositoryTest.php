@@ -15,7 +15,7 @@ class AggregateRootRepositoryTest extends TestCase
     public function testItThrowsAggregateRootRepositoryInstanciationFailedException()
     {
         $this->expectException(AggregateRootRepositoryInstanciationFailed::class);
-        $this->expectExceptionMessage("You have to set an aggregate root before the repository can be initialized.");
+        $this->expectExceptionMessage('You have to set an aggregate root before the repository can be initialized.');
 
         new class() extends AggregateRootRepository {
             protected $aggregateRoot = null;
@@ -44,7 +44,7 @@ class AggregateRootRepositoryTest extends TestCase
         $this->repository()->persist($aggregateRoot);
 
         $this->assertDatabaseHas('domain_messages', [
-            'aggregate_root_id' =>  $aggregateRootId->toString()
+            'aggregate_root_id' =>  $aggregateRootId->toString(),
         ]);
     }
 
@@ -59,17 +59,16 @@ class AggregateRootRepositoryTest extends TestCase
         $aggregateRoot->testEvent(1, 50);
         $aggregateRoot->testEvent(2, 500);
 
-
         $this->repository()->persist($aggregateRoot);
 
         $this->assertDatabaseHas('balance', [
             'user_id'   =>  1,
-            'balance'   =>  150
+            'balance'   =>  150,
         ]);
 
         $this->assertDatabaseHas('balance', [
             'user_id'   =>  2,
-            'balance'   =>  500
+            'balance'   =>  500,
         ]);
     }
 }

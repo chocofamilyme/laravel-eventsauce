@@ -2,12 +2,12 @@
 
 namespace Chocofamily\LaravelEventSauce;
 
+use Chocofamily\LaravelEventSauce\Console\GenerateCommand;
 use Chocofamily\LaravelEventSauce\Console\MakeAggregateCommand;
 use Chocofamily\LaravelEventSauce\Console\MakeConsumerCommand;
 use EventSauce\EventSourcing\Serialization\ConstructingMessageSerializer;
 use EventSauce\EventSourcing\Serialization\MessageSerializer;
 use Illuminate\Support\ServiceProvider;
-use Chocofamily\LaravelEventSauce\Console\GenerateCommand;
 
 final class EventSauceServiceProvider extends ServiceProvider
 {
@@ -35,7 +35,7 @@ final class EventSauceServiceProvider extends ServiceProvider
         $this->commands([
             GenerateCommand::class,
             MakeAggregateCommand::class,
-            MakeConsumerCommand::class
+            MakeConsumerCommand::class,
         ]);
     }
 
@@ -44,7 +44,7 @@ final class EventSauceServiceProvider extends ServiceProvider
         return [
             GenerateCommand::class,
             MakeAggregateCommand::class,
-            MakeConsumerCommand::class
+            MakeConsumerCommand::class,
         ];
     }
 }

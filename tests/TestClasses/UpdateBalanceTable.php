@@ -17,7 +17,7 @@ final class UpdateBalanceTable extends Consumer
         } else {
             $query->insert([
                 'user_id'   =>  $event->userId,
-                'balance'   =>  $event->amount
+                'balance'   =>  $event->amount,
             ]);
         }
     }

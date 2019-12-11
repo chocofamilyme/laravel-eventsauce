@@ -9,6 +9,6 @@ class MoneyAggregateRootRepository extends AggregateRootRepository
     protected $aggregateRoot = MoneyAggregateRoot::class;
 
     protected $consumers = [
-        UpdateBalanceTable::class
+        UpdateBalanceTable::class,
     ];
 }

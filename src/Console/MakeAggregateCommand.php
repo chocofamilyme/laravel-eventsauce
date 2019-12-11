@@ -2,8 +2,8 @@
 
 namespace Chocofamily\LaravelEventSauce\Console;
 
-use DateTimeImmutable;
 use Chocofamily\LaravelEventSauce\Exceptions\MakeFileFailed;
+use DateTimeImmutable;
 use Illuminate\Support\Str;
 
 final class MakeAggregateCommand extends MakeCommand

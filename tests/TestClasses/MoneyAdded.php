@@ -23,20 +23,19 @@ class MoneyAdded implements SerializablePayload
         $this->amount = $amount;
     }
 
-
     public function toPayload(): array
     {
         return [
             'userId'    =>  $this->userId,
-            'amount'    =>  $this->amount
+            'amount'    =>  $this->amount,
         ];
     }
 
     public static function fromPayload(array $payload): SerializablePayload
     {
         return new self(
-            (int)$payload['userId'],
-            (int)$payload['amount']
+            (int) $payload['userId'],
+            (int) $payload['amount']
         );
     }
 }

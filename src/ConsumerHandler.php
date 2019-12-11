@@ -35,5 +35,4 @@ final class ConsumerHandler implements ShouldQueue
             $this->consumer->handle($message);
         }
     }
-
 }

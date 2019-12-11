@@ -11,7 +11,7 @@ class MessageRepositoryTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @var MessageRepository  */
+    /** @var MessageRepository */
     protected $messageRepository;
 
     public function setUp(): void
@@ -23,15 +23,15 @@ class MessageRepositoryTest extends TestCase
 
     public function testItCanPersistMessage()
     {
-       $aggregateId = MoneyAggregateRootId::create();
+        $aggregateId = MoneyAggregateRootId::create();
 
-       $message = $this->getTestMessage($aggregateId);
+        $message = $this->getTestMessage($aggregateId);
 
-       $this->messageRepository->persist($message);
+        $this->messageRepository->persist($message);
 
-       $this->assertDatabaseHas('domain_messages', [
+        $this->assertDatabaseHas('domain_messages', [
            'id'                 =>  1,
-           'aggregate_root_id'  =>  $aggregateId->toString()
+           'aggregate_root_id'  =>  $aggregateId->toString(),
        ]);
     }
 
