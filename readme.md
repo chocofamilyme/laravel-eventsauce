@@ -1,57 +1,95 @@
+
 # LaravelEventSauce
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Total Downloads][ico-downloads]][link-downloads]
-[![Build Status][ico-travis]][link-travis]
 [![StyleCI][ico-styleci]][link-styleci]
 
-This is where your description should go. Take a look at [contributing.md](contributing.md) to see a to do list.
+Laravel wrapper for [Eventsauce](https://eventsauce.io/). Before using this package you should already know how to work with EventSauce.
+
+## Requirements
+
+- PHP ^7.2
+- Laravel ^5.8
 
 ## Installation
 
 Via Composer
 
-``` bash
-$ composer require chocofamily/laraveleventsauce
+```bash
+composer require chocofamilyme/laravel-eventsauce
 ```
+## Migrations
+
+You can publish and modify default migrations tables (`domain_messages`, `snapshots`) with the following command:
+
+```bash
+php artisan vendor:publish --tag="eventsauce-migrations"
+php artisan migrate
+```
+
+
+## Configuration
+
+You can publish the config file with the following command:
+
+```bash
+php artisan vendor:publish --tag="eventsauce-config"
+```
+
+#### Code Generation
+
+Types, commands and events can be generated starting from a yaml file. Here you can specify the input and the output of the code generation. More info on code generation here: https://eventsauce.io/docs/getting-started/create-events-and-commands
+
+#### Default Connection
+
+The default database connection can be modified by setting the `EVENTSAUCE_CONNECTION` env variable:
+
+```dotenv
+EVENTSAUCE_CONNECTION=mysql
+```
+
+#### Default Message Table
+
+The default table name for your domain messages can be set with the `EVENTSAUCE_TABLE` env variable:
+
+```dotenv
+EVENTSAUCE_TABLE=domain_messages
+```
+
+### Default Snapshot Table
+
+The default table name use to store snapshots can be set with the `EVENTSAUCE_SNAPSHOT_TABLE` env variable:
+
+```dotenv
+EVENTSAUCE_SNAPSHOT_TABLE=snapshots
+```
+
+#### Default Message Repository
+
+This class will be used to store messages. You may change this to any class that implements `EventSauce\EventSourcing\MessageRepository` , by default used `Chocofamily\LaravelEventSauce\MessageRepository::class`
+
+#### Default Snapshot Repository
+
+This class will be used to store snapshots. You may change this to any class that implements `EventSauce\EventSourcing\Snapshotting\SnapshotRepository` , by default used `Chocofamily\LaravelEventSauce\SnapshotRepository::class`
+
+#### Default Consumer Handler
+
+This class will be used to put message on the handlers, by default used `Chocofamily\LaravelEventSauce\ConsumerHandler::class`
 
 ## Usage
-
-## Change log
-
-Please see the [changelog](changelog.md) for more information on what has changed recently.
-
-## Testing
-
-``` bash
-$ composer test
-```
-
-## Contributing
-
-Please see [contributing.md](contributing.md) for details and a todolist.
-
-## Security
-
-If you discover any security related issues, please email author email instead of using the issue tracker.
-
-## Credits
-
-- [author name][link-author]
-- [All Contributors][link-contributors]
+TODO
 
 ## License
 
 license. Please see the [license file](license.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/chocofamily/laraveleventsauce.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/chocofamily/laraveleventsauce.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/chocofamily/laraveleventsauce/master.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/chocofamilyme/laravel-eventsauce.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/chocofamilyme/laravel-eventsauce.svg?style=flat-square
 [ico-styleci]: https://github.styleci.io/repos/225345376/shield
 
-[link-packagist]: https://packagist.org/packages/chocofamily/laraveleventsauce
-[link-downloads]: https://packagist.org/packages/chocofamily/laraveleventsauce
-[link-travis]: https://travis-ci.org/chocofamily/laraveleventsauce
+[link-packagist]: https://packagist.org/packages/chocofamilyme/laravel-eventsauce
+[link-downloads]: https://packagist.org/packages/chocofamilyme/laravel-eventsauce
 [link-styleci]: https://github.styleci.io/repos/225345376
 [link-author]: https://github.com/chocofamily
 [link-contributors]: ../../contributors
