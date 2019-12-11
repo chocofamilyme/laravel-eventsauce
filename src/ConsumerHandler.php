@@ -2,7 +2,7 @@
 
 namespace Chocofamily\LaravelEventSauce;
 
-use EventSauce\EventSourcing\Consumer;
+use EventSauce\EventSourcing\Consumer as EventSauceConsumer;
 use EventSauce\EventSourcing\Message;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -12,7 +12,7 @@ final class ConsumerHandler implements ShouldQueue
 {
     use InteractsWithQueue, Queueable;
 
-    /** @var Consumer */
+    /** @var EventSauceConsumer */
     private $consumer;
 
     /** @var Message[] */
@@ -20,10 +20,10 @@ final class ConsumerHandler implements ShouldQueue
 
     /**
      * ConsumerHandler constructor.
-     * @param Consumer $consumer
+     * @param EventSauceConsumer $consumer
      * @param Message[] $messages
      */
-    public function __construct(Consumer $consumer, Message ...$messages)
+    public function __construct(EventSauceConsumer $consumer, Message ...$messages)
     {
         $this->consumer = $consumer;
         $this->messages = $messages;
