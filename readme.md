@@ -1,14 +1,17 @@
 
-# LaravelEventSauce
+<h1 align="center"> LaravelEventSauce </h1>
 
-[![Latest Version on Packagist][ico-version]][link-packagist]
-[![Total Downloads][ico-downloads]][link-downloads]
-[![StyleCI][ico-styleci]][link-styleci]
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/chocofamilyme/laravel-eventsauce/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/chocofamilyme/laravel-eventsauce/?branch=master)
-[![Code Intelligence Status](https://scrutinizer-ci.com/g/chocofamilyme/laravel-eventsauce/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
-[![Build Status](https://scrutinizer-ci.com/g/chocofamilyme/laravel-eventsauce/badges/build.png?b=master)](https://scrutinizer-ci.com/g/chocofamilyme/laravel-eventsauce/build-status/master)
+<p align="center">
+  Laravel wrapper for <a href="https://eventsauce.io/">EventSauce</a>. Before using this package you should already know how to work with EventSauce.
+</p>
 
-Laravel wrapper for [Eventsauce](https://eventsauce.io/). Before using this package you should already know how to work with EventSauce.
+<p align="center">
+<a href="https://packagist.org/packages/chocofamilyme/laravel-eventsauce"><img src="https://img.shields.io/packagist/v/chocofamilyme/laravel-eventsauce.svg?style=flat-square" alt="Latest Stable Version"></a>
+<a href="https://github.styleci.io/repos/225345376"><img src="https://github.styleci.io/repos/225345376/shield"></a>
+<a href="https://packagist.org/packages/chocofamilyme/laravel-eventsauce"><img src="https://img.shields.io/packagist/dt/chocofamilyme/laravel-eventsauce.svg?style=flat-square" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/chocofamilyme/laravel-eventsauce"><img src="https://poser.pugx.org/chocofamilyme/laravel-eventsauce/license" alt="License"></a>
+<a href="https://scrutinizer-ci.com/g/chocofamilyme/laravel-eventsauce/?branch=master"><img src="https://scrutinizer-ci.com/g/chocofamilyme/laravel-eventsauce/badges/quality-score.png?b=master"</a>  
+</p>  
 
 ## Requirements
 
