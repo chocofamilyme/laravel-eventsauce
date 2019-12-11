@@ -52,6 +52,6 @@ license. Please see the [license file](license.md) for more information.
 [link-packagist]: https://packagist.org/packages/chocofamily/laraveleventsauce
 [link-downloads]: https://packagist.org/packages/chocofamily/laraveleventsauce
 [link-travis]: https://travis-ci.org/chocofamily/laraveleventsauce
-[link-styleci]: https://styleci.io/repos/12345678
+[link-styleci]: https://github.styleci.io/repos/225345376
 [link-author]: https://github.com/chocofamily
 [link-contributors]: ../../contributors
