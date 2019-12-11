@@ -47,7 +47,7 @@ license. Please see the [license file](license.md) for more information.
 [ico-version]: https://img.shields.io/packagist/v/chocofamily/laraveleventsauce.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/chocofamily/laraveleventsauce.svg?style=flat-square
 [ico-travis]: https://img.shields.io/travis/chocofamily/laraveleventsauce/master.svg?style=flat-square
-[ico-styleci]: https://styleci.io/repos/12345678/shield
+[ico-styleci]: https://github.styleci.io/repos/225345376/shield
 
 [link-packagist]: https://packagist.org/packages/chocofamily/laraveleventsauce
 [link-downloads]: https://packagist.org/packages/chocofamily/laraveleventsauce
