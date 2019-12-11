@@ -41,7 +41,7 @@ abstract class TestCase extends Orchestra
 
     protected function getTestMessage(MoneyAggregateRootId $id = null): Message
     {
-        $event = new MoneyAdded(100);
+        $event = new MoneyAdded(1, 100);
 
         $id = $id ?? MoneyAggregateRootId::create();
 
