@@ -18,7 +18,6 @@ final class MakeConsumerCommand extends MakeCommand
         $consumerClass = $this->formatClassName($class);
 
         $consumerPath = $this->getPath($consumerClass);
-        
         try {
             $this->ensureValidPaths([
                 $consumerPath,
