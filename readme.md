@@ -57,9 +57,9 @@ The default table name for your domain messages can be set with the `EVENTSAUCE_
 EVENTSAUCE_TABLE=domain_messages
 ```
 
-### Default Snapshot Table
+#### Default Snapshot Table
 
-The default table name use to store snapshots can be set with the `EVENTSAUCE_SNAPSHOT_TABLE` env variable:
+The default table name used to store snapshots can be set with the `EVENTSAUCE_SNAPSHOT_TABLE` env variable:
 
 ```dotenv
 EVENTSAUCE_SNAPSHOT_TABLE=snapshots
