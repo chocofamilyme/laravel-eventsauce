@@ -4,6 +4,9 @@
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Total Downloads][ico-downloads]][link-downloads]
 [![StyleCI][ico-styleci]][link-styleci]
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/chocofamilyme/laravel-eventsauce/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/chocofamilyme/laravel-eventsauce/?branch=master)
+[![Code Intelligence Status](https://scrutinizer-ci.com/g/chocofamilyme/laravel-eventsauce/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
+[![Build Status](https://scrutinizer-ci.com/g/chocofamilyme/laravel-eventsauce/badges/build.png?b=master)](https://scrutinizer-ci.com/g/chocofamilyme/laravel-eventsauce/build-status/master)
 
 Laravel wrapper for [Eventsauce](https://eventsauce.io/). Before using this package you should already know how to work with EventSauce.
 
