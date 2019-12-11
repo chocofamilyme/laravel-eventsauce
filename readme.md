@@ -9,8 +9,10 @@
 <a href="https://packagist.org/packages/chocofamilyme/laravel-eventsauce"><img src="https://img.shields.io/packagist/v/chocofamilyme/laravel-eventsauce.svg?style=flat-square" alt="Latest Stable Version"></a>
 <a href="https://github.styleci.io/repos/225345376"><img src="https://github.styleci.io/repos/225345376/shield"></a>
 <a href="https://packagist.org/packages/chocofamilyme/laravel-eventsauce"><img src="https://img.shields.io/packagist/dt/chocofamilyme/laravel-eventsauce.svg?style=flat-square" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/chocofamilyme/laravel-eventsauce"><img src="https://poser.pugx.org/chocofamilyme/laravel-eventsauce/license" alt="License"></a>
-<a href="https://scrutinizer-ci.com/g/chocofamilyme/laravel-eventsauce/?branch=master"><img src="https://scrutinizer-ci.com/g/chocofamilyme/laravel-eventsauce/badges/quality-score.png?b=master"</a>  
+<a href="https://scrutinizer-ci.com/g/chocofamilyme/laravel-eventsauce/?branch=master"><img src="https://scrutinizer-ci.com/g/chocofamilyme/laravel-eventsauce/badges/quality-score.png?b=master"</a> 
+<a href="https://scrutinizer-ci.com/g/chocofamilyme/laravel-eventsauce/?branch=master"><img src="https://scrutinizer-ci.com/g/chocofamilyme/laravel-eventsauce/badges/code-intelligence.svg?b=master"</a>   
+<a href="https://packagist.org/packages/chocofamilyme/laravel-eventsauce"><img src="https://poser.pugx.org/chocofamilyme/laravel-eventsauce/license" alt="License"></a>  
+  
 </p>  
 
 ## Requirements
