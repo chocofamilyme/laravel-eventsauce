@@ -6,7 +6,6 @@ use Chocofamily\LaravelEventSauce\Exceptions\AggregateRootRepositoryInstanciatio
 use EventSauce\EventSourcing\AggregateRoot;
 use EventSauce\EventSourcing\AggregateRootId;
 use EventSauce\EventSourcing\ConstructingAggregateRootRepository;
-use EventSauce\EventSourcing\Consumer as EventSauceConsumer;
 use EventSauce\EventSourcing\DefaultHeadersDecorator;
 use EventSauce\EventSourcing\MessageDecorator;
 use EventSauce\EventSourcing\MessageDecoratorChain;
@@ -66,7 +65,7 @@ abstract class AggregateRootRepository implements EventSauceAggregateRootReposit
             new MessageDispatcherChain(
                 new MessageDispatcher(
                     $this->getConsumerHandlerClass(),
-                    $this->getInstanciatedConsumers()
+                    $this->consumers
                 ),
                 new EventMessageDispatcher()
             ),
@@ -188,14 +187,6 @@ abstract class AggregateRootRepository implements EventSauceAggregateRootReposit
     protected function getConsumerHandlerClass(): string
     {
         return $this->consumerHandlerClass ?? config('eventsauce.consumer_handler');
-    }
-
-    /**
-     * @return EventSauceConsumer[]
-     */
-    protected function getInstanciatedConsumers(): array
-    {
-        return $this->instanciate($this->consumers);
     }
 
     /**

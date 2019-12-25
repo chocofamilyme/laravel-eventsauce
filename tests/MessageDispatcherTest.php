@@ -24,7 +24,7 @@ class MessageDispatcherTest extends TestCase
     {
         return new MessageDispatcher(
             ConsumerHandler::class,
-            [new UpdateBalanceTable()]
+            [UpdateBalanceTable::class]
         );
     }
 }
