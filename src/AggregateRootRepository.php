@@ -66,7 +66,7 @@ abstract class AggregateRootRepository implements EventSauceAggregateRootReposit
             new MessageDispatcherChain(
                 new MessageDispatcher(
                     $this->getConsumerHandlerClass(),
-                    $this->getInstanciatedConsumers()
+                    $this->consumers
                 ),
                 new EventMessageDispatcher()
             ),
@@ -188,14 +188,6 @@ abstract class AggregateRootRepository implements EventSauceAggregateRootReposit
     protected function getConsumerHandlerClass(): string
     {
         return $this->consumerHandlerClass ?? config('eventsauce.consumer_handler');
-    }
-
-    /**
-     * @return EventSauceConsumer[]
-     */
-    protected function getInstanciatedConsumers(): array
-    {
-        return $this->instanciate($this->consumers);
     }
 
     /**
