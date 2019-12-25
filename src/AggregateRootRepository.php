@@ -6,7 +6,6 @@ use Chocofamily\LaravelEventSauce\Exceptions\AggregateRootRepositoryInstanciatio
 use EventSauce\EventSourcing\AggregateRoot;
 use EventSauce\EventSourcing\AggregateRootId;
 use EventSauce\EventSourcing\ConstructingAggregateRootRepository;
-use EventSauce\EventSourcing\Consumer as EventSauceConsumer;
 use EventSauce\EventSourcing\DefaultHeadersDecorator;
 use EventSauce\EventSourcing\MessageDecorator;
 use EventSauce\EventSourcing\MessageDecoratorChain;
