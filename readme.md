@@ -2,7 +2,7 @@
 <h1 align="center"> LaravelEventSauce </h1>
 
 <p align="center">
-  Laravel wrapper for <a href="https://eventsauce.io/">EventSauce</a>. Before using this package you should already know how to work with EventSauce.
+  Laravel adapter for <a href="https://eventsauce.io/">EventSauce</a>. Before using this package you should already know how to work with EventSauce.
 </p>
 
 <p align="center">
