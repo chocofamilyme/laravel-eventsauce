@@ -30,9 +30,9 @@ class MessageRepositoryTest extends TestCase
         $this->messageRepository->persist($message);
 
         $this->assertDatabaseHas('domain_messages', [
-           'id'                 =>  1,
-           'aggregate_root_id'  =>  $aggregateId->toString(),
-       ]);
+            'id'                 =>  1,
+            'aggregate_root_id'  =>  $aggregateId->toString(),
+        ]);
     }
 
     public function testItCanRetrieveMessages()
