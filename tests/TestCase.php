@@ -20,9 +20,9 @@ abstract class TestCase extends Orchestra
         parent::setUp();
 
         $this->loadMigrationsFrom([
-           '--database' =>  'testing',
-           '--path'     =>  realpath(__DIR__.'/../database/migrations'),
-       ]);
+            '--database' =>  'testing',
+            '--path'     =>  realpath(__DIR__.'/../database/migrations'),
+        ]);
 
         Schema::create('balance', function (Blueprint $table) {
             $table->bigIncrements('id');

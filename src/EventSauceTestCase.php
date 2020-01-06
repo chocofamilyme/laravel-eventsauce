@@ -19,8 +19,8 @@ use EventSauce\EventSourcing\SynchronousMessageDispatcher;
 use EventSauce\EventSourcing\TestUtilities\ConsumerThatSerializesMessages;
 use EventSauce\EventSourcing\Time\Clock;
 use EventSauce\EventSourcing\Time\TestClock;
-use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Exception;
+use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use LogicException;
 
 abstract class EventSauceTestCase extends BaseTestCase
@@ -151,7 +151,7 @@ abstract class EventSauceTestCase extends BaseTestCase
     protected function when(...$arguments)
     {
         try {
-            if ( ! method_exists($this, 'handle')) {
+            if (! method_exists($this, 'handle')) {
                 throw new LogicException(sprintf('Class %s is missing a ::handle method.', get_class($this)));
             }
 
