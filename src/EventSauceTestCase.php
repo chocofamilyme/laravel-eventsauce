@@ -195,6 +195,10 @@ abstract class EventSauceTestCase extends BaseTestCase
 
     protected function assertLastCommitEqualsEvents(object ...$events): void
     {
+        if (empty($events)) {
+            return;
+        }
+
         self::assertEquals($events, $this->messageRepository->lastCommit(), 'Events are not equal.');
     }
 
