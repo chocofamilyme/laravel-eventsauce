@@ -2,7 +2,6 @@
 
 namespace {{ namespace }};
 
-use EventSauce\EventSourcing\Message;
 use Chocofamily\LaravelEventSauce\Consumer;
 
 final class {{ consumer }} extends Consumer
