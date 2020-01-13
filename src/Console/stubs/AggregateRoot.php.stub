@@ -3,7 +3,7 @@
 namespace {{ namespace }};
 
 use EventSauce\EventSourcing\AggregateRoot;
-use EventSauce\EventSourcing\AggregateRootBehaviour;
+use Chocofamily\LaravelEventSauce\Traits\AggregateRootBehaviour;
 
 final class {{ aggregateRoot }} implements AggregateRoot
 {
