@@ -45,12 +45,12 @@ trait AggregateRootBehaviour
     {
         $parts = explode('\\', get_class($event));
 
-        $method = 'apply' . end($parts);
+        $method = 'apply'.end($parts);
 
         if (method_exists($this, $method)) {
             $this->$method($event);
 
-            ++$this->aggregateRootVersion;
+            $this->aggregateRootVersion++;
         }
     }
 
