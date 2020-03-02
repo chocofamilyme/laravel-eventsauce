@@ -65,9 +65,12 @@ abstract class EventSauceTestCase extends BaseTestCase
      */
     protected $aggregateRootId;
 
-    /**
-     * @before
-     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->setUpEventSauce();
+    }
+
     protected function setUpEventSauce(): void
     {
         $className = $this->aggregateRootClassName();
@@ -237,6 +240,14 @@ abstract class EventSauceTestCase extends BaseTestCase
         );
     }
 
+    private function messageDecorator(): MessageDecorator
+    {
+        return new MessageDecoratorChain(
+            new DefaultHeadersDecorator(),
+            ...$this->decorators()
+        );
+    }
+
     /**
      * @return Consumer[]
      */
@@ -245,9 +256,12 @@ abstract class EventSauceTestCase extends BaseTestCase
         return [];
     }
 
-    private function messageDecorator(): MessageDecorator
+    /**
+     * @return MessageDecorator[]
+     */
+    protected function decorators(): array
     {
-        return new MessageDecoratorChain(new DefaultHeadersDecorator());
+        return [];
     }
 
     protected function aggregateRootRepository(
