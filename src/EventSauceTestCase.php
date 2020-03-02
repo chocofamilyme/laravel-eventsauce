@@ -65,13 +65,11 @@ abstract class EventSauceTestCase extends BaseTestCase
      */
     protected $aggregateRootId;
 
-
     protected function setUp(): void
     {
         parent::setUp();
         $this->setUpEventSauce();
     }
-
 
     protected function setUpEventSauce(): void
     {
